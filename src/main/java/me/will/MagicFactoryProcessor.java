@@ -47,6 +47,9 @@ public class MagicFactoryProcessor extends AbstractProcessor {
 				processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "Processing " + simpleName);
 			}
 
+			TypeElement typeElement = (TypeElement) element;
+			ClassName className = ClassName.get(typeElement);
+
 			MethodSpec pullOut = MethodSpec.methodBuilder("pullOut")
 					.addModifiers(Modifier.PUBLIC)
 					.returns(String.class)
@@ -55,11 +58,9 @@ public class MagicFactoryProcessor extends AbstractProcessor {
 
 			TypeSpec magicFactory = TypeSpec.classBuilder("MagicFactory")
 					.addModifiers(Modifier.PUBLIC)
+					.addSuperinterface(className)
 					.addMethod(pullOut)
 					.build();
-
-			TypeElement typeElement = (TypeElement) element;
-			ClassName className = ClassName.get(typeElement);
 
 			Filer filer = processingEnv.getFiler();
 			try {
