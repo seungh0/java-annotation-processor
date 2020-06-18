@@ -1,0 +1,5 @@
+#me.will.MagicFactoryProcessor
+
+# 주석하고 -> mvn clean install => 주석 풀고 mvn install => 대신 auto-service 사용 (services/ 필요 없어짐)
+
+# Service Provider 내용 참조
